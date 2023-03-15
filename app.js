@@ -14,8 +14,6 @@ app.set('view engine','ejs');
 app.use(express.static(__dirname + '/public'));
 // parse incoming form data
 app.use(bodyParser.urlencoded({ extended: true }));
-// use static files in the public folder
-app.use(express.static('public'));
 // use method-override for PUT and DELETE requests
 app.use(methodOverride('_method'));
 
@@ -64,17 +62,17 @@ app.get('/', async (req, res) => {
   });
 
 // delete item from the to-do list
-  app.delete('/:id', async(req, res) => {
-    const itemId = req.params.id;
-  
-    await Item.findByIdAndRemove(itemId, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.redirect('/');
-      }
-    });
-  });
+app.delete('/:id', async (req, res) => {
+  const itemId = req.params.id;
+
+  try {
+    await Item.findOneAndDelete({ _id: itemId });
+    res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
   
 
 // start the server
