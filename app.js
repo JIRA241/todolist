@@ -20,7 +20,7 @@ app.use(methodOverride('_method'));
 
 // connect to MongoDB
 mongoose.connect(
-    'mongodb+srv://loop:top271241@atlascluster.af82uvu.mongodb.net/?retryWrites=true&w=majority', 
+    'mongodb+srv://<Username>:<pass>@atlascluster.af82uvu.mongodb.net/?retryWrites=true&w=majority', 
     {
     useNewUrlParser: true,
     useUnifiedTopology: true,
